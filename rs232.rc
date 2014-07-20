@@ -1,0 +1,87 @@
+#include "resource.h"
+#include <windows.h>
+/*----------------------------------------------------------------------------*/
+
+rs232menu MENU DISCARDABLE
+{
+    POPUP "&File"
+    {
+		MENUITEM "&Save data to txt",			IDM_SAVE
+        MENUITEM "E&xit",                       IDM_EXIT
+    }
+    POPUP "&Help"
+    {
+        MENUITEM "A&bout",                      IDM_ABOUT
+    }
+}
+/*----------------------------------------------------------------------------*/
+
+IDD_DLG_FIRST DIALOG 256, 64, 328, 246
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
+CAPTION "RS232"
+MENU rs232menu
+FONT 8, "MS Shell Dlg"
+BEGIN
+	LTEXT       "Port selection",    IDC_STATIC,  8, 8, 64, 16
+	COMBOBOX IDC_CB_PORTS,   8, 18, 64, 128, WS_VISIBLE | WS_CHILD | WS_TABSTOP
+	| CBS_DROPDOWNLIST | CBS_SORT | CBS_AUTOHSCROLL
+	
+	PUSHBUTTON "&Open port", IDC_BTN_OPEN, 8, 36, 64, 16
+	
+	PUSHBUTTON "&Close port", IDC_BTN_CLOSE, 8, 58, 64, 16
+	
+	GROUPBOX 	"Port Setting",  IDC_STATIC,  80, 8, 240, 68
+	LTEXT       "Baudrate",    IDC_STATIC,  88, 18, 64, 16
+	COMBOBOX IDC_CB_BAUDRATE,   88, 28, 64, 128, WS_VISIBLE | WS_CHILD | WS_TABSTOP
+	| CBS_DROPDOWNLIST | CBS_AUTOHSCROLL
+	
+	LTEXT       "Data bits",    IDC_STATIC,  168, 18, 64, 16
+	COMBOBOX IDC_CB_DATABITS,   168, 28, 64, 128, WS_VISIBLE | WS_CHILD | WS_TABSTOP
+	| CBS_DROPDOWNLIST | CBS_SORT | CBS_AUTOHSCROLL
+	
+	LTEXT       "Parity",    IDC_STATIC,  246, 18, 64, 16
+	COMBOBOX IDC_CB_PARITY,   246, 28, 64, 128, WS_VISIBLE | WS_CHILD | WS_TABSTOP
+	| CBS_DROPDOWNLIST | CBS_SORT | CBS_AUTOHSCROLL
+	
+	LTEXT       "Stop bits",    IDC_STATIC,  88, 46, 64, 16
+	COMBOBOX IDC_CB_STOPBITS,   88, 56, 64, 128, WS_VISIBLE | WS_CHILD | WS_TABSTOP
+	| CBS_DROPDOWNLIST | CBS_SORT | CBS_AUTOHSCROLL
+	
+	LTEXT       "Flow control",    IDC_STATIC,  168, 46, 64, 16
+	COMBOBOX IDC_CB_FLOWCONTROL,   168, 56, 64, 128, WS_VISIBLE | WS_CHILD | WS_TABSTOP
+	| CBS_DROPDOWNLIST | CBS_SORT | CBS_AUTOHSCROLL
+	
+	LTEXT       "Timer interval",    IDC_STATIC,  246, 46, 64, 16
+	EDITTEXT	IDC_EDT_NUMBER, 246, 56, 64, 12, ES_NUMBER
+	
+	GROUPBOX 	"Data transfer",  IDC_STATIC,  8, 82, 312, 136
+	LTEXT       "Data to be sent",    IDC_STATIC,  16, 92, 64, 16
+	EDITTEXT IDC_EDT_INPUT, 16, 104, 140, 12, ES_LEFT | ES_AUTOVSCROLL 
+	| ES_MULTILINE | WS_VSCROLL | WS_EX_CLIENTEDGE
+	LTEXT       "Monitoring sent data",    IDC_STATIC,  16, 120, 64, 16
+	LISTBOX		IDC_LB_MSDATA, 16, 132, 140, 56, LBS_NOINTEGRALHEIGHT|
+	LBS_EXTENDEDSEL | WS_VSCROLL | WS_TABSTOP
+	PUSHBUTTON "Clear &sent", IDC_BTN_CLEARSENT, 16, 194, 64, 16
+	PUSHBUTTON "Clear &mo sent", IDC_BTN_CLEARMSENT, 88, 194, 64, 16
+	
+	LTEXT       "Received data",    IDC_STATIC,  180, 92, 64, 16
+	LISTBOX		IDC_LB_RDATA, 168, 104, 140, 84, LBS_NOINTEGRALHEIGHT|
+	LBS_EXTENDEDSEL | WS_VSCROLL | WS_TABSTOP
+	PUSHBUTTON "Clear &received", IDC_BTN_CLEARRECEIVED, 168, 194, 64, 16
+	
+	PUSHBUTTON "&Reset", IDC_BTN_RESET, 16, 224, 64, 16
+	PUSHBUTTON "E&xit", IDC_BTN_EXIT, 248, 224, 64, 16
+	
+	CTEXT		" ", IDC_CT_SHOWDATE, 120, 228, 88, 12
+END
+
+/*
+WS_TABSTOP: The window is a control that can receive the keyboard focus when the user presses the TAB key.
+Pressing the TAB key changes the keyboard focus to the next control with the WS_TABSTOP style
+
+CBS_SIMPLE: Displays the list box at all times. The current selection in the list box is displayed in 
+			the edit control.
+CBS_DROPDOWN: Similar to CBS_SIMPLE, except that the list box is not displayed unless the user selects 
+			 an icon next to the edit control.
+WS_VSCROLL: The window has a vertical scroll bar.
+*/
