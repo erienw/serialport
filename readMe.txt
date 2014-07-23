@@ -1,2 +1,1 @@
-It is a simple C program and WIN32API-Dialogboxes-based writing for Serial Port.
-
+It is a simple C and WIN32API-Dialogboxes-based program  writing for Serial Port.
